@@ -5,6 +5,8 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 
@@ -23,22 +25,19 @@ public class bikeRepo {
         ((BikeRepoPage) TestScenario.landingPage).countNumberOfBikes();
     }
 
-    @Then("^the total number of bikes are displayed$")
-    public void theTotalNumberOfBikesAreDisplayed() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @Then("^the total number of bikes on the page are verified$")
+    public void theTotalNumberOfBikesOnThePageAreVerified() throws Throwable {
+      assertTrue("Verify total number of bikes on the repo page",((BikeRepoPage) TestScenario.landingPage).verifyNumberOfBikes());
     }
 
     @When("^I check the informarion of bike \"([^\"]*)\"$")
-    public void iCheckTheInformarionOfBike(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void iCheckTheInformarionOfBike(String bikeNumber) throws Throwable {
+        ((BikeRepoPage) TestScenario.landingPage).bikeInformation(bikeNumber);
     }
 
     @Then("^the bike name, bike description, bike class are displayed$")
     public void theBikeNameBikeDescriptionBikeClassAreDisplayed() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        ((BikeRepoPage) TestScenario.landingPage).bikeInformationDisplayed();
     }
 
     @When("^I filter the bikes page by ''filter(\\d+)\"$")

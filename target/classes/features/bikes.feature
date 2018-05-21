@@ -4,13 +4,13 @@ Feature: Bike Store Tests
 
     Given I have navigated to the Bike store page "http://localhost:8000/"
     When I count the number of bikes
-    Then the total number of bikes are displayed
+    Then the total number of bikes on the page are verified
 
 ##########################################################################################################################################################################################################################################
   @bb-bikeInformation
-  Scenario: Display all the bike informarion includig name, Description and class
+  Scenario Outline: Display all the bike informarion includig name, Description and class
 
-    Given I have navigated to the "Bike store" page
+    Given I have navigated to the Bike store page "http://localhost:8000/"
     When I check the informarion of bike "number"
     Then the bike name, bike description, bike class are displayed
 
@@ -25,9 +25,9 @@ Feature: Bike Store Tests
   | 7|
   ##########################################################################################################################################################################################################################################
   @bb-bikeSorting
-  Scenario: Display all the bike according to the sorting order
+  Scenario Outline: Display all the bike according to the sorting order
 
-    Given I have navigated to the "Bike store" page
+    Given I have navigated to the Bike store page "http://localhost:8000/"
     When I filter the bikes page by ''filter1"
     Then the filtered bikes name, bikes description, bikes class are displayed
 
