@@ -15,8 +15,9 @@ public class bikeRepo {
     @Given("^I have navigated to the Bike store page \"([^\"]*)\"$")
      public void iHaveNavigatedToTheBikeStorePage(String url) throws Throwable {
         // Navigates to Bike Repo
-        TestScenario.landingPage = new BikeRepoPage(SeleniumDriver.getDriver());
-        ((BikeRepoPage) TestScenario.landingPage).load(url);
+       TestScenario.landingPage = new BikeRepoPage(SeleniumDriver.getDriver());
+       ((BikeRepoPage) TestScenario.landingPage).load(url);
+        // new BikeRepoPage(SeleniumDriver.getDriver());
         assertTrue("verify Bike Repo Page is Loaded: ", ((BikeRepoPage) TestScenario.landingPage).isLoaded());
     }
 
@@ -28,29 +29,35 @@ public class bikeRepo {
     @Then("^the total number of bikes on the page are verified$")
     public void theTotalNumberOfBikesOnThePageAreVerified() throws Throwable {
       assertTrue("Verify total number of bikes on the repo page",((BikeRepoPage) TestScenario.landingPage).verifyNumberOfBikes());
+        SeleniumDriver.closeDriver();
     }
 
-    @When("^I check the informarion of bike \"([^\"]*)\"$")
-    public void iCheckTheInformarionOfBike(String bikeNumber) throws Throwable {
-        ((BikeRepoPage) TestScenario.landingPage).bikeInformation(bikeNumber);
-    }
-
-    @Then("^the bike name, bike description, bike class are displayed$")
-    public void theBikeNameBikeDescriptionBikeClassAreDisplayed() throws Throwable {
-        ((BikeRepoPage) TestScenario.landingPage).bikeInformationDisplayed();
-    }
-
-    @When("^I filter the bikes page by ''filter(\\d+)\"$")
-    public void iFilterTheBikesPageByFilter(int arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }
-
-    @Then("^the filtered bikes name, bikes description, bikes class are displayed$")
-    public void theFilteredBikesNameBikesDescriptionBikesClassAreDisplayed() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @When("^I click the information of \"([^\"]*)\"$")
+    public void iClickTheInformationOf(String bikeNumber) throws Throwable {
+        ((BikeRepoPage) TestScenario.landingPage).clickBikeInformation(bikeNumber);
     }
 
 
+    @Then("^I check the bike name, bike description, bike class of \"([^\"]*)\" are displayed$")
+    public void iCheckTheBikeNameBikeDescriptionBikeClassOfAreDisplayed(String bikeNumber) throws Throwable {
+        assertTrue("Verify that bike name is displayed",(((BikeRepoPage) TestScenario.landingPage).bikeNameDisplayed(bikeNumber)));
+        assertTrue("Verify that bike description is displayed",(((BikeRepoPage) TestScenario.landingPage).bikeDescriptionDisplayed(bikeNumber)));
+        assertTrue("Verify that bike class is displayed",(((BikeRepoPage) TestScenario.landingPage).bikeClassDisplayed(bikeNumber)));
+        //assertTrue("Verify that bike Image is displayed",(((BikeRepoPage) TestScenario.landingPage).bikeImageDisplayed(bikeNumber)));
+        SeleniumDriver.closeDriver();
+    }
+
+
+    @When("^I filter the bikes page by \"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\"$")
+    public void iFilterTheBikesPageBy(String filter1, String filter2, String filter3) throws Throwable {
+        ((BikeRepoPage) TestScenario.landingPage).filterBikes(filter1);
+        ((BikeRepoPage) TestScenario.landingPage).filterBikes(filter2);
+        ((BikeRepoPage) TestScenario.landingPage).filterBikes(filter3);
+    }
+
+    @Then("^I verify that the bikes are sorted based on bike class \"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\"$")
+    public void iVerifyThatTheBikesAreSortedBasedOnBikeClass(String filter1, String filter2, String filter3) throws Throwable {
+            assertTrue("Verify that filtered bikes are displayed",(((BikeRepoPage) TestScenario.landingPage).filteredBikesDisplayed(filter1,filter2,filter3)));
+            SeleniumDriver.closeDriver();
+        }
 }

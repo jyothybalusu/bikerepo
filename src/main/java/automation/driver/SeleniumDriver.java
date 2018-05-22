@@ -15,8 +15,7 @@ public class SeleniumDriver {
             driver = new ChromeDriver();
             driver.manage().deleteAllCookies();
             driver.manage().window().maximize();
-          RemoteWebDriver driver= new ChromeDriver();
-        return driver;
+           return driver;
     }
 
     public synchronized static void closeDriver() {

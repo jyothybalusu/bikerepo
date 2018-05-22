@@ -8,32 +8,39 @@ Feature: Bike Store Tests
 
 ##########################################################################################################################################################################################################################################
   @bb-bikeInformation
-  Scenario Outline: Display all the bike informarion includig name, Description and class
+  Scenario Outline: Display all the bike information including name, Description and class
 
     Given I have navigated to the Bike store page "http://localhost:8000/"
-    When I check the informarion of bike "number"
-    Then the bike name, bike description, bike class are displayed
+    When I click the information of "<bikeNumber>"
+    Then I check the bike name, bike description, bike class of "<bikeNumber>" are displayed
 
   Examples:
-  | number|
+  | bikeNumber|
   | 1|
   | 2|
   | 3|
+  | 1|
   | 4|
   | 5|
   | 6|
   | 7|
+
+
   ##########################################################################################################################################################################################################################################
   @bb-bikeSorting
   Scenario Outline: Display all the bike according to the sorting order
 
     Given I have navigated to the Bike store page "http://localhost:8000/"
-    When I filter the bikes page by ''filter1"
-    Then the filtered bikes name, bikes description, bikes class are displayed
+    When I filter the bikes page by "<filter1>","<filter2>","<filter3>"
+    Then I verify that the bikes are sorted based on bike class "<filter1>","<filter2>","<filter3>"
 
   Examples:
-  | filter1|
-  | endurance|
-  | Race|
-  | Class|
+  | filter1|filter2|filter3|
+ | endurance|     |       |
+  | race     |     |       |
+  | comfort  |     |       |
+  |endurance|race|     |
+  |race     |comfort|  |
+  |endurance|comfort|  |
+  |endurance|comfort|race|
  ##########################################################################################################################################################################################################################################
