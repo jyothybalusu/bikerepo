@@ -32,6 +32,7 @@ Feature: Bike Store Tests
 
     Given I have navigated to the Bike store page "http://localhost:8000/"
     When I filter the bikes page by "<filter1>","<filter2>","<filter3>"
+    And I refresh the page
     Then I verify that the bikes are sorted based on bike class "<filter1>","<filter2>","<filter3>"
 
   Examples:

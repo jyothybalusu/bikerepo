@@ -19,22 +19,12 @@ import static org.junit.Assert.assertTrue;
 
 public class BikeRepoPage extends Page {
 
-    /**
-     * Declaration of all the Webelements used on this page
-     */
-
-
-
-    @FindBy(xpath = "//input[@type='checkbox'] /following-sibling::span[text()='race']")
-    WebElement raceCheckbox;
-
-    @FindBy(xpath = "//input[@type='checkbox'] /following-sibling::span[text()='comfort']")
-    WebElement comfortCheckbox;
-
     public BikeRepoPage(RemoteWebDriver driver) {
         super(driver);
     }
 
+
+    //Loads the Bike repo page
     public boolean load(String url) throws Throwable {
         try {
             navigateTo(url);
@@ -44,6 +34,7 @@ public class BikeRepoPage extends Page {
         }
     }
 
+    //Checks that the bike repo page is loaded
     public boolean isLoaded() throws Throwable {
         try {
             By bikes = By.xpath("//div[@class='col-md-10 prodList']/div");
@@ -56,12 +47,7 @@ public class BikeRepoPage extends Page {
         }
     }
 
-    public boolean navigateTOBikeRepo(String url) {
-        TestScenario.landingPage = new BikeRepoPage(SeleniumDriver.getDriver());
-        driver.get(url);
-        return true;
-    }
-
+    //Count nuber of bikes displayed on the page
     public void countNumberOfBikes() throws Throwable {
         try {
             List<WebElement> listImages = driver.findElements(By.xpath("//div[@class='col-md-10 prodList']/div"));
@@ -71,6 +57,7 @@ public class BikeRepoPage extends Page {
         }
     }
 
+    //Verifies the number of bikes displayed on the page is same as total number of bikes on the page
     public boolean verifyNumberOfBikes() throws Throwable {
         try {
             List<WebElement> listImages = driver.findElements(By.xpath("//div[@class='col-md-10 prodList']/div"));
@@ -97,6 +84,16 @@ public class BikeRepoPage extends Page {
         }
     }
 
+//Refreshes the page
+    public void refreshPage() throws Throwable{
+        try{
+            driver.navigate().refresh();
+    }
+        catch (Throwable throwable) {
+            throw new Exception("Unable to refresh page");
+        }
+    }
+    //Displays the bike name of the selected one
     public boolean bikeNameDisplayed(String bikeNumber) throws Throwable {
         try {
 
@@ -145,6 +142,7 @@ public class BikeRepoPage extends Page {
         }
     }
 
+    //Displays the bike description of the selected one
     public boolean bikeDescriptionDisplayed(String bikeNumber) throws Throwable {
         try {
             int bikeNo;
@@ -191,6 +189,8 @@ public class BikeRepoPage extends Page {
             throw new Exception("Unable to verify the bike description displayed");
         }
     }
+
+    //displays the bikes based on the filtered classes
 
     public boolean bikeClassDisplayed(String bikeNumber) throws Throwable {
         try {
@@ -243,6 +243,8 @@ public class BikeRepoPage extends Page {
         }
     }
 
+
+    //Check that the specified bike image is displayed
     public boolean bikeImageDisplayed(String bikeNumber) throws Throwable {
         try {
             WebElement bikeOneImage = driver.findElementByXPath("//img[@ng-src='https://jujhar.com/images/bikes/780300_overview.png']");
@@ -300,6 +302,7 @@ public class BikeRepoPage extends Page {
         }
     }
 
+    //Filters bikes based on the bike filter class
     public void filterBikes(String filter) throws Throwable {
         try {
             WebElement enduranceCheckbox = driver.findElementByXPath("//span[text()='endurance']/preceding-sibling::input");
@@ -327,6 +330,8 @@ public class BikeRepoPage extends Page {
             throw new Exception("Unable to verify the bike information displayed");
         }
     }
+
+    //Checks that the right number of bikes are dispayed once thge filter is applied
         public boolean filteredBikesDisplayed(String filter1,String filter2,String filter3) throws Throwable{
             try{
                 List<WebElement> listImages = driver.findElements(By.xpath("//div[@class='col-md-10 prodList']/div"));
